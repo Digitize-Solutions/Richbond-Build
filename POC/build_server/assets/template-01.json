@@ -1,0 +1,71 @@
+{
+  "companyLogo": "https://ml.globenewswire.com/Resource/Download/0d95b461-e230-489e-9479-8c9ac70fcc3f",
+  "companyPhone": "(844) 657-4608",
+  "companyEmail": "sales@parcelpending.com",
+  "projectName": "Test Project",
+  "date": "12th Feb 2021",
+  "name": "Clark Kent",
+  "contact": "Miles Morales",
+  "address": "123 Metcalf St",
+  "phone": "+1 (221) 845-2747",
+  "email": "bob@email.com",
+  "thumbnail": "https://www.parcelpending.com/wp-content/uploads/2021/06/locker-mailroom.jpg",
+  "table": [
+    {
+      "value": "Outdoor D13",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D15",
+      "quantity": 20,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D14",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D11",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D10",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    
+    {
+      "value": "Outdoor D11",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D10",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D11",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D10",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D11",
+      "quantity": 10,
+      "color": "Grey"
+    },
+    {
+      "value": "Outdoor D10",
+      "quantity": 10,
+      "color": "Grey"
+    }
+  ]
+}
