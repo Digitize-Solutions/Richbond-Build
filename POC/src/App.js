@@ -1,29 +1,46 @@
+import { Components } from 'antd/lib/date-picker/generatePicker';
 import React from 'react';
-import { Card, Row, Col } from 'antd';
 //  Threekit Components
 import { TwoCol, Player, Buttons, Swatch, ColorSwatch } from 'threekit/components';
-import { Form } from '../threekit/components';
 //  Parcel Pending Components
 import { ConsoleSelector, ToggleSwitch } from './component';
 import SelectOrdinalItem from './Tools/SelectOrdinalItem';
-import { AwaitPlayerLoad } from '../threekit/components';
-import { Label } from '../threekit/react/components/InputComponents/RadioButtons/radioButtons.styles';
-import PopUpForm from './component/PopUpForm';
-import { bomClick } from './ParcelPendingUtils';
+import { useState } from 'react';
+// const setSofa = (componentName, assetId) => {
+//   dummyConfiguration[componentName] = { assetId: assetId }
+// }
 
+// const setFillerValues = (e) => {
+//   setselectedAssetId(e)
+//   const configuration = window.threekit.configurator.getConfiguration();
+//   console.log('Selected Assets ID>>>>>>', e)
+//   Object.keys(configuration).forEach(element => {
+//     if (element.includes('Dummy')) {
+//       let dummyConfiguration = {}
+//       dummyConfiguration[element] = { assetId: '319d5209-fa64-4e51-b448-8b4ea91f6dd9' }
+//       window.threekit.configurator.setConfiguration(dummyConfiguration);
+//       // setSofa(componentName, e)
+//     }
+//   });
+// }
 
-const setFillerValues = (e) => {
-  const configuration = window.threekit.configurator.getConfiguration();
-  console.log('Selected Assets ID>>>>>>', e)
-  Object.keys(configuration).forEach(element => {
-    if (element.includes('Dummy')) {
-      let dummyConfiguration = {}
-      dummyConfiguration[element] = { assetId: '319d5209-fa64-4e51-b448-8b4ea91f6dd9' }
-      window.threekit.configurator.setConfiguration(dummyConfiguration);
-    }
-  });
-}
 const App = () => {
+  const [selectedAssetId, setselectedAssetId] = useState('')
+  const setFillerValues = (e) => {
+    const configuration = window.threekit.configurator.getConfiguration();
+    setselectedAssetId(e)
+    console.log('Selected Assets ID>>>>>>', e)
+    Object.keys(configuration).forEach(element => {
+      if (element.includes('Dummy')) {
+        let dummyConfiguration = {}
+        dummyConfiguration[element] = { assetId: '319d5209-fa64-4e51-b448-8b4ea91f6dd9' }
+        window.threekit.configurator.setConfiguration(dummyConfiguration);
+      }
+    });
+  }
+  // const getFromChild = (childData)=>{
+  //   let childData = childData;
+  // }
   return (
     <div  >
 

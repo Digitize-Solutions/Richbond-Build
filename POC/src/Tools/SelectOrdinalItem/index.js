@@ -3,6 +3,7 @@ import { useThreekitInitStatus, useAttributes } from 'threekit/hooks';
 import { Wrapper } from './selectOrdinalItem.styles';
 import { ButtonWrapper } from '../../../threekit/react/components/Widgets/widgets.styles';
 import { DeleteIcon, LeftIcon, RightIcon } from './../../component/Icons';
+import { Components } from 'antd/lib/date-picker/generatePicker';
 
 const findHitItem = (hitNodes) => {
   if (!hitNodes.length) return undefined;
@@ -36,7 +37,8 @@ export const SelectOrdinalItem = (props) => {
   const [attributes, setConfiguration] = useAttributes();
   const optionSet = useRef();
 
-  const clickHandler = async (event) => {
+  
+  const clickHandler = async (event, selectedAssetId) => {
     if (!optionSet.current) {
       optionSet.current = new Set([]);
 
@@ -64,7 +66,19 @@ export const SelectOrdinalItem = (props) => {
 
     //  We add the itme to the selection state
     threekit.player.selectionSet.add(clickedItem.nodeId);
-    console.log(clickedItem)
+
+    var parentid = threekit.player.scene.get({ id: clickedItem.nodeId })?.parent; //get the parent node id of the selected node
+    var parentName = threekit.player.scene.get({ id: parentid }); //get the attribute name of the selected node
+
+    if (parentName.name.includes('Dummy')) {
+      let parent = parentName.name;
+      var dummyNumber = parent.match(/(\d+)/);
+      dummyNumber = parseInt(dummyNumber[0]) + 1;
+      let ComponentName = 'Component ' + dummyNumber;
+      let config = {}
+      config[ComponentName] = { assetId: 'abb85bcc-d449-476b-a273-f2aa4f51274d' }
+      window.threekit.configurator.setConfiguration(config)
+    }
     //  Show UI
     setSelectedItemName(clickedItem.name);
 
