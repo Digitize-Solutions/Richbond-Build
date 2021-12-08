@@ -18,7 +18,16 @@ export const findHitItem = (hitNodes) => {
   );
 };
 
-
+export const setDummtToNUll = () => {
+  let config = window.threekit.configurator.getConfiguration();
+  let dummyConfig = {}
+  Object.keys(config).forEach(element => {
+    if (element.includes('Dummy')) {
+      dummyConfig[element] = { 'assetId': 'efac53aa-c67f-46b5-96b8-34db0730037f' }
+    }
+  });
+  window.threekit.configurator.setConfiguration(dummyConfig)
+}
 
 const findHitNode = (hitNodes, name) => {
   if (!hitNodes.length) return undefined;
@@ -34,14 +43,11 @@ const findHitNode = (hitNodes, name) => {
 
 
 export const SelectOrdinalItem = (props) => {
-
-  console.log(props.selectedAssetId)
   const loaded = useThreekitInitStatus();
   const [selectedItemName, setSelectedItemName] = useState();
   const [selectedTowerName, setselectedTowerName] = useState();
   const [attributes, setConfiguration] = useAttributes();
   const optionSet = useRef();
-
 
   const clickHandler = async (event) => {
     if (!optionSet.current) {
@@ -63,8 +69,7 @@ export const SelectOrdinalItem = (props) => {
     //  We find the 'Item' that has been clicked by
     //  the user
     const clickedItem = findHitItem(event.hitNodes);
-    // props.getClickedItems(clickedItem);
-    console.log(clickedItem)
+
     //    If no item is clicked we return out
     if (!optionSet.current.has(clickedItem.name))
       return setSelectedItemName(false);
@@ -76,25 +81,32 @@ export const SelectOrdinalItem = (props) => {
     var parentName = threekit.player.scene.get({ id: parentid }); //get the attribute name of the selected node
 
     if (parentName.name.includes('Dummy')) {
-
       let parent = parentName.name;
-      var dummyNumber = parent.match(/(\d+)/);
+      let dummyNumber = parent.match(/(\d+)/);
       dummyNumber = parseInt(dummyNumber[0]) + 1;
-
+      let config = {};
       let ComponentName = 'Component ' + dummyNumber;
-      let currentCompName = 'Component ' + (dummyNumber + 1);
-      let currentCompAssetId = window.threekit.configurator.getConfiguration()[ComponentName]['assetId'];
-      let config = {}
       config[ComponentName] = { assetId: window.selectedAssetId }
-      config[currentCompName] = { assetId: currentCompAssetId }
+      let currentCompAssetId = window.threekit.configurator.getConfiguration()[ComponentName]['assetId'];
+      config['Component ' + (dummyNumber + 1)] = { assetId: currentCompAssetId };
+      let prevCompAssetId = config['Component ' + (dummyNumber + 1)]['assetId'];
+      for (let i = dummyNumber; i < 15; i++) {
+        let nextCompName = 'Component ' + (i + 1);
+        config[nextCompName] = { assetId: prevCompAssetId }
+        prevCompAssetId = window.threekit.configurator.getConfiguration()[nextCompName]['assetId'];
+      }
+      console.log('>>>>>>>>>>>>>>> ', config)
       window.threekit.configurator.setConfiguration(config);
+      setDummtToNUll();
     }
+
+
     //  Show UI
     setSelectedItemName(clickedItem.name);
 
     //  We find the 'Tower' that has been clicked by
     //  the user
-    const clickedAttribute = findHitNode(event.hitNodes, "Dummy");
+    const clickedAttribute = findHitNode(event.hitNodes, "Tower");
     setselectedTowerName(clickedAttribute.name);
 
   };
