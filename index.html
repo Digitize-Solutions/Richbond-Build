@@ -1,1 +1,26 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href=""/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>React | Threekit</title><script defer="defer" src="threekit-embed.js"></script></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Richbond</title>
+  </head>
+  <body>
+    <h1>Select A Preset</h1>
+    <div>
+      <h2 onclick="reRoute('Config1')">Config1</h2>
+      <h2 onclick="reRoute('Config2')">Config2</h2>
+      <h2 onclick="reRoute('Config3')">Config3</h2>
+      <h2 onclick="reRoute('Config4')">Config4</h2>
+    </div>
+  </body>
+
+  <script>
+    const reRoute = (chosenConfig) => {
+      let currentUrl = window.location.href;
+      let modifiedUrl = currentUrl + `?chosenConfig=${chosenConfig}`;
+      window.open(modifiedUrl);
+    };
+  </script>
+</html>
